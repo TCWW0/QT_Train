@@ -24,30 +24,37 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="ArrayEdit">
+   <widget class="QTextEdit" name="debugOutput">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>20</y>
-      <width>251</width>
-      <height>71</height>
+      <x>500</x>
+      <y>170</y>
+      <width>191</width>
+      <height>251</height>
      </rect>
-    </property>
-    <property name="text">
-     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="bubbleSortButton">
     <property name="geometry">
      <rect>
-      <x>340</x>
-      <y>20</y>
-      <width>141</width>
-      <height>41</height>
+      <x>500</x>
+      <y>100</y>
+      <width>191</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="text">
      <string>冒泡排序</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="ArrayEdit">
+    <property name="geometry">
+     <rect>
+      <x>500</x>
+      <y>20</y>
+      <width>191</width>
+      <height>51</height>
+     </rect>
     </property>
    </widget>
   </widget>
