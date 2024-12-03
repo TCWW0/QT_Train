@@ -145,32 +145,6 @@ QLineEdit::placeholder {
      <string/>
     </property>
    </widget>
-   <widget class="QComboBox" name="sortChoose">
-    <property name="geometry">
-     <rect>
-      <x>840</x>
-      <y>30</y>
-      <width>131</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QComboBox {
-    font: 14pt 'Arial';          /* 设置字体为14pt的Arial */
-    color: #333333;              /* 设置字体颜色为#333333 */
-    background-color: #f0f0f0;   /* 设置背景色为浅灰色 */
-    border: 1px solid #ccc;      /* 设置边框为1px，颜色为浅灰色 */
-    border-radius: 5px;          /* 设置圆角半径为5px */
-    padding: 5px 10px;           /* 设置内边距，顶部和底部5px，左右10px */
-}
-QComboBox::drop-down {
-    border: none;                /* 去掉下拉箭头的边框 */
-    background-color: #e0e0e0;   /* 设置下拉框背景色为浅灰色 */
-    border-radius: 3px;          /* 设置下拉框的圆角半径为3px */
-}
-</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="quickSortButton">
     <property name="geometry">
      <rect>
@@ -204,7 +178,6 @@ QPushButton:hover {
    <zorder>debugOutput</zorder>
    <zorder>bubbleSortButton</zorder>
    <zorder>ArrayEdit</zorder>
-   <zorder>sortChoose</zorder>
    <zorder>quickSortButton</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">

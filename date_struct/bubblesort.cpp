@@ -13,6 +13,7 @@ void BubbleSort::bubblesort()
         {
             if(myArray[j]>myArray[j+1])
             {
+
                 Swap(j,j+1);
                 myscene->update();
             }

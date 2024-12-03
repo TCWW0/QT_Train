@@ -14,12 +14,6 @@
 #include "quicksort.h"
 #include "bubblesort.h"
 
-enum sortType{
-    quickSort,
-    chooseSort,
-    bubblesort
-};
-
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -35,14 +29,12 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
     void setStyle();
-    void sortChooseInit();
-    void sortInit();
     void connectInit();
     //这好像是库打桩那块相似的替换技术啊
     void on_ArrayEdit_editingFinished();
     void on_bubbleSortButton_clicked();
-    void on_sortChoose_currentIndexChanged(int index);
 
 private:
     Ui::MainWindow *ui;//管理的ui文件

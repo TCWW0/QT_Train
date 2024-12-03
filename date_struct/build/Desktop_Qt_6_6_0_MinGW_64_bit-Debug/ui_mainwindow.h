@@ -11,7 +11,6 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QComboBox>
 #include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
@@ -31,7 +30,6 @@ public:
     QGraphicsView *graphicsView;
     QPushButton *bubbleSortButton;
     QLineEdit *ArrayEdit;
-    QComboBox *sortChoose;
     QPushButton *quickSortButton;
     QMenuBar *menubar;
     QStatusBar *statusbar;
@@ -121,24 +119,6 @@ public:
 "    color: #AAAAAA;\n"
 "    font-style: italic;\n"
 "}"));
-        sortChoose = new QComboBox(centralwidget);
-        sortChoose->setObjectName("sortChoose");
-        sortChoose->setGeometry(QRect(840, 30, 131, 41));
-        sortChoose->setStyleSheet(QString::fromUtf8("QComboBox {\n"
-"    font: 14pt 'Arial';          /* \350\256\276\347\275\256\345\255\227\344\275\223\344\270\27214pt\347\232\204Arial */\n"
-"    color: #333333;              /* \350\256\276\347\275\256\345\255\227\344\275\223\351\242\234\350\211\262\344\270\272#333333 */\n"
-"    background-color: #f0f0f0;   /* \350\256\276\347\275\256\350\203\214\346\231\257\350\211\262\344\270\272\346\265\205\347\201\260\350\211\262 */\n"
-"    border: 1px solid #ccc;      /* \350\256\276\347\275\256\350\276\271\346\241\206\344\270\2721px\357\274\214\351\242\234\350\211\262\344\270\272\346\265\205\347\201\260\350\211\262 */\n"
-"    border-radius: 5px;          /* \350\256\276\347\275\256\345\234\206\350\247\222\345\215\212\345\276\204\344\270\2725px */\n"
-"    padding: 5px 10px;           /* \350\256\276\347\275\256\345\206\205\350\276\271\350\267\235\357\274\214\351\241\266\351\203\250\345\222\214\345\272\225\351\203\2505px\357\274\214\345\267\246\345\217\26310px */\n"
-"}\n"
-"QComboBox::drop-down {\n"
-"    border: none;      "
-                        "          /* \345\216\273\346\216\211\344\270\213\346\213\211\347\256\255\345\244\264\347\232\204\350\276\271\346\241\206 */\n"
-"    background-color: #e0e0e0;   /* \350\256\276\347\275\256\344\270\213\346\213\211\346\241\206\350\203\214\346\231\257\350\211\262\344\270\272\346\265\205\347\201\260\350\211\262 */\n"
-"    border-radius: 3px;          /* \350\256\276\347\275\256\344\270\213\346\213\211\346\241\206\347\232\204\345\234\206\350\247\222\345\215\212\345\276\204\344\270\2723px */\n"
-"}\n"
-""));
         quickSortButton = new QPushButton(centralwidget);
         quickSortButton->setObjectName("quickSortButton");
         quickSortButton->setGeometry(QRect(840, 140, 131, 51));
@@ -161,7 +141,6 @@ public:
         debugOutput->raise();
         bubbleSortButton->raise();
         ArrayEdit->raise();
-        sortChoose->raise();
         quickSortButton->raise();
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
