@@ -189,7 +189,6 @@ void ShapeManager::onSortHigh()
 void ShapeManager::updateDebugOutput(QString text)
 {
     if (debugOutput) {
-        qDebug() << "更新调试信息: " << text;  // 输出到调试控制台
         debugOutput->append(text);
     }
 }

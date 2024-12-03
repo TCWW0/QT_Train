@@ -32,6 +32,7 @@ public:
     QPushButton *bubbleSortButton;
     QLineEdit *ArrayEdit;
     QComboBox *sortChoose;
+    QPushButton *quickSortButton;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -44,7 +45,7 @@ public:
         centralwidget->setObjectName("centralwidget");
         debugOutput = new QTextEdit(centralwidget);
         debugOutput->setObjectName("debugOutput");
-        debugOutput->setGeometry(QRect(580, 160, 231, 250));
+        debugOutput->setGeometry(QRect(580, 100, 231, 250));
         debugOutput->setStyleSheet(QString::fromUtf8("QTextEdit {\n"
 "    border: 2px solid #5A5A5A;  /* \350\276\271\346\241\206\351\242\234\350\211\262 */\n"
 "    border-radius: 12px;         /* \345\234\206\350\247\222\345\215\212\345\276\204\345\242\236\345\244\247\357\274\214\346\237\224\345\214\226\350\276\271\350\247\222 */\n"
@@ -80,7 +81,7 @@ public:
         graphicsView->setGeometry(QRect(0, 0, 1061, 671));
         bubbleSortButton = new QPushButton(centralwidget);
         bubbleSortButton->setObjectName("bubbleSortButton");
-        bubbleSortButton->setGeometry(QRect(580, 90, 250, 50));
+        bubbleSortButton->setGeometry(QRect(840, 80, 131, 41));
         bubbleSortButton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "    background-color: #808080;\n"
 "    color: white;\n"
@@ -138,12 +139,30 @@ public:
 "    border-radius: 3px;          /* \350\256\276\347\275\256\344\270\213\346\213\211\346\241\206\347\232\204\345\234\206\350\247\222\345\215\212\345\276\204\344\270\2723px */\n"
 "}\n"
 ""));
+        quickSortButton = new QPushButton(centralwidget);
+        quickSortButton->setObjectName("quickSortButton");
+        quickSortButton->setGeometry(QRect(840, 140, 131, 51));
+        quickSortButton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: #808080;\n"
+"    color: white;\n"
+"    border: 2px solid #808080;\n"
+"    border-radius: 15px;\n"
+"    padding: 10px 20px;\n"
+"    font-size: 16px;\n"
+"    font-weight: bold;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: #333333;\n"
+"    border: 2px solid #333333;\n"
+"}"));
         MainWindow->setCentralWidget(centralwidget);
         graphicsView->raise();
         debugOutput->raise();
         bubbleSortButton->raise();
         ArrayEdit->raise();
         sortChoose->raise();
+        quickSortButton->raise();
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
         menubar->setGeometry(QRect(0, 0, 1304, 25));
@@ -173,6 +192,7 @@ public:
         ArrayEdit->setToolTip(QCoreApplication::translate("MainWindow", "<html><head/><body><p>\350\257\267\345\234\250\346\255\244\350\276\223\345\205\245\346\225\260\347\273\204(1 1 1 1...)</p></body></html>", nullptr));
 #endif // QT_CONFIG(tooltip)
         ArrayEdit->setText(QString());
+        quickSortButton->setText(QCoreApplication::translate("MainWindow", "\345\277\253\351\200\237\346\216\222\345\272\217", nullptr));
     } // retranslateUi
 
 };

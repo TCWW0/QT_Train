@@ -12,10 +12,12 @@
 #include "shapemanager.h"
 #include "arraybasic.h"
 #include "quicksort.h"
+#include "bubblesort.h"
 
 enum sortType{
-    quickSort=0,
-    chooseSort
+    quickSort,
+    chooseSort,
+    bubblesort
 };
 
 QT_BEGIN_NAMESPACE
@@ -36,19 +38,18 @@ public:
     void setStyle();
     void sortChooseInit();
     void sortInit();
-
-private slots:
+    void connectInit();
+    //这好像是库打桩那块相似的替换技术啊
     void on_ArrayEdit_editingFinished();
-
-    //void on_bubbleSortButton_clicked();
-
+    void on_bubbleSortButton_clicked();
     void on_sortChoose_currentIndexChanged(int index);
 
 private:
     Ui::MainWindow *ui;//管理的ui文件
     QGraphicsScene *scene; // 场景
-    //ShapeManager *shapeManager;
-    QList <ArrayBasic*>sortArray;
+    ShapeManager *shapeManager;
+    QuickSort *quicksort;
+    //QList <ArrayBasic*>sortArray;为什么会报错呢，为什么呢！！！！！
     //简单的基础测试，之后将会用一个arraybasic类数组来实现对于多种排序方法的支持
 };
 #endif // MAINWINDOW_H

@@ -7,7 +7,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     scene=new QGraphicsScene(this);
-    //shapeManager=new ShapeManager(scene,ui->debugOutput);
+    shapeManager=new ShapeManager(scene,ui->debugOutput);
+
+    connectInit();//各个按钮的槽函数连接
 
     //关联ui视图的scene和视图属性
     ui->graphicsView->setScene(scene);
@@ -22,9 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
     this->setFixedSize(1000, 500);  // 设置固定的窗口大小
     this->setStatusBar(nullptr); // 禁用状态栏
 
-
     scene->setSceneRect(0, 0, 800, 500);//画布大小
-
 
     // 显示视图
     this->setWindowTitle("QGraphicsView 示例");
@@ -33,6 +33,14 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+//由于数组和下拉窗的bug所以我直接摆烂使用按钮来进行设计了
+void MainWindow::connectInit()
+{
+    connect(ui->ArrayEdit,&QLineEdit::editingFinished,this,&MainWindow::on_ArrayEdit_editingFinished);
+    connect(ui->bubbleSortButton,&QPushButton::clicked,this,&MainWindow::on_bubbleSortButton_clicked);
+    connect(ui->sortChoose,&QComboBox::currentIndexChanged,this,&MainWindow::on_sortChoose_currentIndexChanged);
 }
 
 void MainWindow::setStyle()
@@ -63,57 +71,43 @@ void MainWindow::on_ArrayEdit_editingFinished()
             newArray.append(value);
         }
     }
-    //需要在这里进行对所有类数组元素的赋值
-    for(auto array:sortArray)
-    {
-        array->reviseArray(newArray);
-    }
-    //由于所有的paint方法都一致，在全部赋值完后进行一次的绘画就行
-    sortArray[0]->paint();
-    //shapeManager->reviseArray(newArray);
-    //shapeManager->paint();
+    shapeManager->reviseArray(newArray);
+    shapeManager->paint();
 }
 
 //冒泡排序高亮
-// void MainWindow::on_bubbleSortButton_clicked()
-// {
-//     qDebug() << "Bubble sort button clicked.";
-//     shapeManager->bubbleSortVisualization();
-// }
+void MainWindow::on_bubbleSortButton_clicked()
+{
+    qDebug() << "Bubble sort button clicked.";
+    shapeManager->bubbleSortVisualization();
+}
 
 void MainWindow::sortChooseInit()
 {
     //防止在设置下拉窗属性时触发信号，有点像信号保护的做法啊
-    disconnect(ui->sortChoose, SIGNAL(currentIndexChanged(int)),
-               this, SLOT(on_sortChoose_currentIndexChanged(int)));
+    disconnect(ui->sortChoose,&QComboBox::currentIndexChanged,this,&MainWindow::on_sortChoose_currentIndexChanged);
 
     // 在下拉框显示的默认项，且该项不会出现在下拉框中
     ui->sortChoose->insertItem(0, "请选择方法");  // 添加一个默认项
     ui->sortChoose->setItemData(0, true, Qt::UserRole - 1);  // 将该项设置为不可选择
-    ui->sortChoose->insertItem(1,"快速排序",QVariant::fromValue(quickSort));  
+    ui->sortChoose->insertItem(1,"快速排序",QVariant::fromValue(quickSort));
+    ui->sortChoose->insertItem(2,"冒泡排序",QVariant::fromValue(bubblesort));
 
     // 设置当前项为默认项
     ui->sortChoose->setCurrentIndex(0);
 
     // 重新连接信号
-    connect(ui->sortChoose, SIGNAL(currentIndexChanged(int)),
-            this, SLOT(on_sortChoose_currentIndexChanged(int)));
+    connect(ui->sortChoose,&QComboBox::currentIndexChanged,this,&MainWindow::on_sortChoose_currentIndexChanged);
 }
 
+//由这个来进行各个按钮的初始化
 void MainWindow::sortInit()
 {
-    QuickSort* quickSort=new QuickSort(scene,ui->debugOutput);
-    //需要在这里去规定插入的排序方法的顺序
-    sortArray.append(quickSort);//0~快速排序
+
 }
 
 void MainWindow::on_sortChoose_currentIndexChanged(int index)
 {
-    if(sortArray.empty())
-    {
-        qDebug()<<"方法数组为空，无法排序\n";
-        return ;
-    }
     // 获取选择项的关联数据（QVariant）
     QVariant selectedData = ui->sortChoose->itemData(index);
 
@@ -124,14 +118,8 @@ void MainWindow::on_sortChoose_currentIndexChanged(int index)
     case quickSort:
 
         qDebug()<<"快速排序调用";
-        if(!sortArray[0])
-        {
-            qDebug()<<"当前快排方法未插入";
-            break;
-        }
-        sortArray.at(0)->specialSort();
         break;
-    case chooseSort:
+    case bubblesort:
 
         break;
     default:
