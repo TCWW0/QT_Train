@@ -7,6 +7,7 @@
 *****************************************************************************/
 
 #include "../../../mainwindow.h"
+#include <QtGui/qtextcursor.h>
 #include <QtCore/qmetatype.h>
 
 #if __has_include(<QtCore/qtmochelpers.h>)
@@ -41,15 +42,17 @@ static constexpr auto qt_meta_stringdata_CLASSMainWindowENDCLASS = QtMocHelpers:
     "MainWindow",
     "on_ArrayEdit_editingFinished",
     "",
-    "on_bubbleSortButton_clicked"
+    "on_sortChoose_currentIndexChanged",
+    "index"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSMainWindowENDCLASS_t {
-    uint offsetsAndSizes[8];
+    uint offsetsAndSizes[10];
     char stringdata0[11];
     char stringdata1[29];
     char stringdata2[1];
-    char stringdata3[28];
+    char stringdata3[34];
+    char stringdata4[6];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSMainWindowENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -58,12 +61,14 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSMainWindowENDCLASS_t qt_meta_st
         QT_MOC_LITERAL(0, 10),  // "MainWindow"
         QT_MOC_LITERAL(11, 28),  // "on_ArrayEdit_editingFinished"
         QT_MOC_LITERAL(40, 0),  // ""
-        QT_MOC_LITERAL(41, 27)   // "on_bubbleSortButton_clicked"
+        QT_MOC_LITERAL(41, 33),  // "on_sortChoose_currentIndexCha..."
+        QT_MOC_LITERAL(75, 5)   // "index"
     },
     "MainWindow",
     "on_ArrayEdit_editingFinished",
     "",
-    "on_bubbleSortButton_clicked"
+    "on_sortChoose_currentIndexChanged",
+    "index"
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -84,11 +89,11 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
        1,    0,   26,    2, 0x08,    1 /* Private */,
-       3,    0,   27,    2, 0x08,    2 /* Private */,
+       3,    1,   27,    2, 0x08,    2 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,    4,
 
        0        // eod
 };
@@ -104,8 +109,9 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<MainWindow, std::true_type>,
         // method 'on_ArrayEdit_editingFinished'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'on_bubbleSortButton_clicked'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>
+        // method 'on_sortChoose_currentIndexChanged'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>
     >,
     nullptr
 } };
@@ -117,11 +123,10 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         (void)_t;
         switch (_id) {
         case 0: _t->on_ArrayEdit_editingFinished(); break;
-        case 1: _t->on_bubbleSortButton_clicked(); break;
+        case 1: _t->on_sortChoose_currentIndexChanged((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
         default: ;
         }
     }
-    (void)_a;
 }
 
 const QMetaObject *MainWindow::metaObject() const

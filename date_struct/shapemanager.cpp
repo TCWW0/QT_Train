@@ -7,7 +7,7 @@ ShapeManager::ShapeManager(QGraphicsScene *scene, QTextEdit *debugOutputWidget)
     myArray={};
     currentStep=0;
     connect(timer,&QTimer::timeout,this,&ShapeManager::onSortHigh);
-    debugOutput->setReadOnly(true);
+    outputBeautify();
 }
 
 void ShapeManager::creatRect()
@@ -65,6 +65,7 @@ int ShapeManager::paint()
         // 将文本放置在矩形的顶部或中间
         int textX = x + rectWidth / 2 - text->boundingRect().width() / 2; // 水平居中
         int textY = y - text->boundingRect().height() - 5;               // 在矩形顶部
+
         text->setPos(textX, textY);
 
         // 添加到场景
@@ -188,6 +189,34 @@ void ShapeManager::onSortHigh()
 void ShapeManager::updateDebugOutput(QString text)
 {
     if (debugOutput) {
+        qDebug() << "更新调试信息: " << text;  // 输出到调试控制台
         debugOutput->append(text);
     }
+}
+
+void ShapeManager::outputBeautify()
+{
+    debugOutput->setReadOnly(true);//将输出栏属性定义为只读
+    //应该在这里进行对各种窗口属性的调整以及设置
+
+    // 设置占位符文本
+    debugOutput->setPlaceholderText("调试信息将在这里输出...");
+
+    // 设置文本对齐方式
+    debugOutput->setAlignment(Qt::AlignLeft | Qt::AlignTop);  // 左对齐，顶部对齐
+
+    // 设置 QTextEdit 为自动换行
+    debugOutput->setWordWrapMode(QTextOption::WrapAnywhere);
+
+    // 设置最大行数或宽度来避免内容溢出
+    debugOutput->setFixedWidth(300);  // 设置固定宽度
+    debugOutput->setFixedHeight(100); // 设置固定高度
+
+    // 启用滚动条
+    debugOutput->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn); // 始终显示竖直滚动条
+    debugOutput->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff); // 水平滚动条关闭
+
+    // 禁止编辑文本
+    debugOutput->setReadOnly(true); // 使 QTextEdit 为只读模式
+    debugOutput->setFixedSize(250, 300);  // 设置固定宽度 500px，固定高度 200px
 }

@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-//65 34 21 43 89 12 78 56 90 3
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -8,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     scene=new QGraphicsScene(this);
-    shapeManager=new ShapeManager(scene,ui->debugOutput);
+    //shapeManager=new ShapeManager(scene,ui->debugOutput);
 
     //关联ui视图的scene和视图属性
     ui->graphicsView->setScene(scene);
@@ -16,106 +15,38 @@ MainWindow::MainWindow(QWidget *parent)
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    this->resize(1000, 500);
-    scene->setSceneRect(0, 0, 800, 500);
+    sortInit();//注意排序方法的实例化要在下拉菜单初始化之前
+    sortChooseInit();//初始化下拉菜单，之后的连接也会在这之中
 
-    setInputProperties();
+    // 固定窗口大小，禁止调整
+    this->setFixedSize(1000, 500);  // 设置固定的窗口大小
+    this->setStatusBar(nullptr); // 禁用状态栏
+
+
+    scene->setSceneRect(0, 0, 800, 500);//画布大小
+
 
     // 显示视图
     this->setWindowTitle("QGraphicsView 示例");
 }
 
-//美化函数
-void MainWindow::setInputProperties()
-{
-    ui->ArrayEdit->setFixedSize({300,40});
-    ui->ArrayEdit->setStyleSheet(
-        "QLineEdit {"
-        "   border: 2px solid #5A5A5A;"
-        "   border-radius: 10px;"
-        "   padding: 5px;"
-        "   background: #F8F9FA;"
-        "   font-size: 16px;"
-        "   color: #333333;"
-        "}"
-        "QLineEdit:hover {"
-        "   border: 2px solid #007BFF;"
-        "}"
-        "QLineEdit:focus {"
-        "   border: 2px solid #28A745;"
-        "   background: #E9F7EF;"
-        "}"
-        "QLineEdit::placeholder {"
-        "   color: #AAAAAA;"
-        "   font-style: italic;"
-        "}"
-        );
-    // 设置占位符文本
-    ui->debugOutput->setPlaceholderText("调试信息将在这里输出...");
-
-    // 设置文本对齐方式
-    ui->debugOutput->setAlignment(Qt::AlignLeft | Qt::AlignTop);  // 左对齐，顶部对齐
-
-    // 设置 QTextEdit 为自动换行
-    ui->debugOutput->setWordWrapMode(QTextOption::WrapAnywhere);
-
-    // 设置最大行数或宽度来避免内容溢出
-    ui->debugOutput->setFixedWidth(300);  // 设置固定宽度
-    ui->debugOutput->setFixedHeight(100); // 设置固定高度
-
-    // 设置样式表（类似之前设置QLineEdit的样式）
-    ui->debugOutput->setStyleSheet(
-        "QTextEdit {"
-        "   border: 2px solid #5A5A5A;"
-        "   border-radius: 10px;"
-        "   padding: 5px;"
-        "   background: #F8F9FA;"
-        "   font-size: 14px;"
-        "   color: #333333;"
-        "}"
-        "QTextEdit:hover {"
-        "   border: 2px solid #007BFF;"
-        "}"
-        "QTextEdit:focus {"
-        "   border: 2px solid #28A745;"
-        "   background: #E9F7EF;"
-        "}"
-        "QTextEdit::placeholder {"
-        "   color: #AAAAAA;"
-        "   font-style: italic;"
-        "}"
-        );
-
-    // 启用滚动条
-    ui->debugOutput->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn); // 始终显示竖直滚动条
-    ui->debugOutput->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff); // 水平滚动条关闭
-
-    // 禁止编辑文本
-    ui->debugOutput->setReadOnly(true); // 使 QTextEdit 为只读模式
-    ui->debugOutput->setFixedSize(250, 300);  // 设置固定宽度 500px，固定高度 200px
-
-    // 设置 bubbleSortButton 的样式表
-    ui->bubbleSortButton->setStyleSheet(
-        "QPushButton {"
-        "   background-color: #808080;"  // 按钮背景色
-        "   color: white;"                // 按钮文字颜色
-        "   border: 2px solid #808080;"   // 边框颜色
-        "   border-radius: 15px;"         // 边框圆角
-        "   padding: 10px 20px;"          // 按钮内边距
-        "   font-size: 16px;"             // 字体大小
-        "   font-weight: bold;"           // 字体加粗，增强文字可读性
-        "}"
-        "QPushButton:hover {"
-        "   background-color: #333333;"  // 鼠标悬停时背景色
-        "   border: 2px solid #333333;"   // 鼠标悬停时边框颜色
-        "}"
-        );
-
-}
-
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::setStyle()
+{
+    QFile file(":/style.qss");
+    if (file.open(QFile::ReadOnly)) {
+        QTextStream ts(&file);
+        QString style = ts.readAll();
+        qApp->setStyleSheet(style);  // 设置应用程序的样式表
+        qDebug()<<"正确使用了样式表格式\n";
+    }
+    else {
+        qDebug() << "样式表加载失败，检查文件路径\n";
+    }
 }
 
 void MainWindow::on_ArrayEdit_editingFinished()
@@ -132,14 +63,79 @@ void MainWindow::on_ArrayEdit_editingFinished()
             newArray.append(value);
         }
     }
-    shapeManager->reviseArray(newArray);
-    shapeManager->paint();
+    //需要在这里进行对所有类数组元素的赋值
+    for(auto array:sortArray)
+    {
+        array->reviseArray(newArray);
+    }
+    //由于所有的paint方法都一致，在全部赋值完后进行一次的绘画就行
+    sortArray[0]->paint();
+    //shapeManager->reviseArray(newArray);
+    //shapeManager->paint();
 }
 
 //冒泡排序高亮
-void MainWindow::on_bubbleSortButton_clicked()
+// void MainWindow::on_bubbleSortButton_clicked()
+// {
+//     qDebug() << "Bubble sort button clicked.";
+//     shapeManager->bubbleSortVisualization();
+// }
+
+void MainWindow::sortChooseInit()
 {
-    qDebug() << "Bubble sort button clicked.";
-    shapeManager->bubbleSortVisualization();
+    //防止在设置下拉窗属性时触发信号，有点像信号保护的做法啊
+    disconnect(ui->sortChoose, SIGNAL(currentIndexChanged(int)),
+               this, SLOT(on_sortChoose_currentIndexChanged(int)));
+
+    // 在下拉框显示的默认项，且该项不会出现在下拉框中
+    ui->sortChoose->insertItem(0, "请选择方法");  // 添加一个默认项
+    ui->sortChoose->setItemData(0, true, Qt::UserRole - 1);  // 将该项设置为不可选择
+    ui->sortChoose->insertItem(1,"快速排序",QVariant::fromValue(quickSort));  
+
+    // 设置当前项为默认项
+    ui->sortChoose->setCurrentIndex(0);
+
+    // 重新连接信号
+    connect(ui->sortChoose, SIGNAL(currentIndexChanged(int)),
+            this, SLOT(on_sortChoose_currentIndexChanged(int)));
+}
+
+void MainWindow::sortInit()
+{
+    QuickSort* quickSort=new QuickSort(scene,ui->debugOutput);
+    //需要在这里去规定插入的排序方法的顺序
+    sortArray.append(quickSort);//0~快速排序
+}
+
+void MainWindow::on_sortChoose_currentIndexChanged(int index)
+{
+    if(sortArray.empty())
+    {
+        qDebug()<<"方法数组为空，无法排序\n";
+        return ;
+    }
+    // 获取选择项的关联数据（QVariant）
+    QVariant selectedData = ui->sortChoose->itemData(index);
+
+    // 转换为枚举类型
+    sortType selectedSort = selectedData.value<sortType>();
+
+    switch (selectedSort) {
+    case quickSort:
+
+        qDebug()<<"快速排序调用";
+        if(!sortArray[0])
+        {
+            qDebug()<<"当前快排方法未插入";
+            break;
+        }
+        sortArray.at(0)->specialSort();
+        break;
+    case chooseSort:
+
+        break;
+    default:
+        break;
+    }
 }
 

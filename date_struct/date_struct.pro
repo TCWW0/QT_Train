@@ -8,13 +8,21 @@ CONFIG += c++17
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+TARGET = date_struct #可执行文件名
+
 SOURCES += \
+    arraybasic.cpp \
+    bubblesort.cpp \
     main.cpp \
     mainwindow.cpp \
+    quicksort.cpp \
     shapemanager.cpp
 
 HEADERS += \
+    arraybasic.h \
+    bubblesort.h \
     mainwindow.h \
+    quicksort.h \
     shapemanager.h
 
 FORMS += \
@@ -24,3 +32,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    resource.qrc

@@ -37,10 +37,7 @@ public:
     void bubbleSortVisualization();
     void onSortHigh();
     void updateDebugOutput(QString text);
-    // void setZero(){currentStep=0;}
-    // bool arrayEmpty(){return myArray.empty();}
-    // bool timerActive(){return timer->isActive();}
-    // void startTimer(){timer->start(2000);}
+    void outputBeautify();
 };
 
 #endif // SHAPEMANAGER_H
