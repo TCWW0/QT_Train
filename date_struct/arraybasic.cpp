@@ -12,11 +12,6 @@ int ArrayBasic::paint()
     if(myArray.empty())return -1;
     myscene->clear();//清空所有图形项
 
-    // int rectWidth = 30;    // 每个矩形的宽度
-    // int spacing = 10;      // 矩形之间的间距
-    // int startX = -90;        // 初始 X 坐标     修改这个可以实现对应矩形其实渲染位置的修改
-    // int startY = 300;      // 场景中 Y 基准线（矩形底部位置）
-
     for (int i = 0; i < myArray.size(); ++i)
     {
         int height = myArray.at(i); // 获取矩形高度
@@ -27,11 +22,6 @@ int ArrayBasic::paint()
         QGraphicsRectItem *rect = new QGraphicsRectItem(x, y, rectWidth, height);
 
         // 设置矩形填充颜色
-
-        //这是随机生成颜色版本
-        // QBrush brush(QColor::fromRgb(randomGenerator->bounded(255),
-        //                              randomGenerator->bounded(255),
-        //                              randomGenerator->bounded(255)));
 
         QBrush brush(Qt::black);
         rect->setBrush(brush);
@@ -84,13 +74,11 @@ void ArrayBasic::Swap(int i,int j){
     int textX2 = rectItem[j]->rect().x() + rectItem[j]->rect().width() / 2 - textItem[j]->boundingRect().width() / 2;
     int textY2 = rectItem[j]->rect().y() - textItem[j]->boundingRect().height() - 5;
     textItem[j]->setPos(textX2, textY2);
+    myscene->update();//刷新一下屏幕
 }
 
 int ArrayBasic::reviseArray(QVector<int> &temp)
 {
-    //myArray.clear();
-    // for(int num:temp)
-    //     myArray.append(num);
     myArray=temp;
     qDebug() << "myArray size after revise: " << myArray.size();
     rectItem.clear();
@@ -98,10 +86,15 @@ int ArrayBasic::reviseArray(QVector<int> &temp)
     return 0;
 }
 
-void ArrayBasic::highLightRectangle(int index,const QColor &color)
+//将传进来的一系列数对应的矩形项全部渲染为特定颜色
+void ArrayBasic::highLightRectangle(const QVector<int>&res,const QColor &color)
 {
-    if(index<0||index>=rectItem.size())return ;
-    rectItem[index]->setBrush(color);
+    int Len=myArray.size();
+    for(int num:res)
+    {
+        if(num>=0 && num<Len)
+        rectItem[num]->setBrush(color);
+    }
 }
 
 void ArrayBasic::OutPutBeautify()
@@ -118,17 +111,16 @@ void ArrayBasic::OutPutBeautify()
     // 设置 QTextEdit 为自动换行
     debugOutput->setWordWrapMode(QTextOption::WrapAnywhere);
 
-    // 设置最大行数或宽度来避免内容溢出
-    debugOutput->setFixedWidth(300);  // 设置固定宽度
-    debugOutput->setFixedHeight(100); // 设置固定高度
-
     // 启用滚动条
     debugOutput->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn); // 始终显示竖直滚动条
     debugOutput->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff); // 水平滚动条关闭
 
     // 禁止编辑文本
     debugOutput->setReadOnly(true); // 使 QTextEdit 为只读模式
-    debugOutput->setFixedSize(250, 300);  // 设置固定宽度 500px，固定高度 200px
+
+    // 设置最大行数或宽度来避免内容溢出
+    debugOutput->setFixedWidth(280);  // 设置固定宽度
+    debugOutput->setFixedHeight(350); // 设置固定高度
 }
 
 int ArrayBasic::modifyElement(int x,int value)
@@ -153,3 +145,19 @@ void ArrayBasic::updateDebugOutput(QString &text)
         debugOutput->append(text);
     }
 }
+
+// void ArrayBasic::cleanGraphicsItem()
+// {
+//     for(auto item:rectItem)
+//     {
+//         myscene->removeItem(item);
+//         delete item;
+//     }
+//     rectItem.clear();
+//     for(auto item:textItem)
+//     {
+//         myscene->removeItem(item);
+//         delete item;
+//     }
+//     rectItem.clear();
+// }

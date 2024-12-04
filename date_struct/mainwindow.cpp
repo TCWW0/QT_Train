@@ -4,13 +4,13 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    ,scene(new QGraphicsScene(this))
 {
-    ui->setupUi(this);
-    scene=new QGraphicsScene(this);
-    shapeManager=new ShapeManager(scene,ui->debugOutput);
-
+    ui->setupUi(this);//必须在这一行后再进行各个排序方法初始化，不然debugoutput是空的会导致崩溃
     connectInit();//各个按钮的槽函数连接
-
+    shapeManager=new ShapeManager(scene,ui->debugOutput);
+    bubbleSort=new BubbleSort(scene,ui->debugOutput);
+    quicksort=new QuickSort(scene,ui->debugOutput);
     //关联ui视图的scene和视图属性
     ui->graphicsView->setScene(scene);
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);
@@ -37,6 +37,8 @@ void MainWindow::connectInit()
 {
     connect(ui->ArrayEdit,&QLineEdit::editingFinished,this,&MainWindow::on_ArrayEdit_editingFinished);
     connect(ui->bubbleSortButton,&QPushButton::clicked,this,&MainWindow::on_bubbleSortButton_clicked);
+    connect(ui->BubbleSort,&QPushButton::clicked,this,&MainWindow::bubbleSortButton_clicked);
+    connect(ui->quickSortButton,&QPushButton::clicked,this,&MainWindow::quickSortButton_clicked);
 }
 
 void MainWindow::setStyle()
@@ -68,16 +70,37 @@ void MainWindow::on_ArrayEdit_editingFinished()
         }
     }
     shapeManager->reviseArray(newArray);
-    shapeManager->paint();
+    bubbleSort->reviseArray(newArray);
+    quicksort->reviseArray(newArray);
+    //shapeManager->paint();//这里只是简单的使用一个类的绘画函数，这是因为我们所有的类的绘画设计都是一样的
+    //bubbleSort->paint();
 }
 
-//冒泡排序高亮
+//冒泡排序调用
 void MainWindow::on_bubbleSortButton_clicked()
 {
+    //必须添加下面俩行进行重绘，不然段错误
+    scene->clear();
+    shapeManager->paint();
     qDebug() << "Bubble sort button clicked.";
     shapeManager->bubbleSortVisualization();
 }
 
+//基类的冒泡排序子函数调用
+void MainWindow::bubbleSortButton_clicked()
+{
+    scene->clear();
+    bubbleSort->paint();
+    qDebug() << "基类的冒泡排序调用";
 
+    bubbleSort->specialSort();
+}
 
+void MainWindow::quickSortButton_clicked()
+{
+    scene->clear();
+    quicksort->paint();
+    qDebug() << "基类的快速排序调用";
+    //quicksort->specialSort();
+}
 

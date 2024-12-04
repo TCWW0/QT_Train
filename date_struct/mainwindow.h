@@ -35,12 +35,15 @@ public:
     //这好像是库打桩那块相似的替换技术啊
     void on_ArrayEdit_editingFinished();
     void on_bubbleSortButton_clicked();
+    void bubbleSortButton_clicked();
+    void quickSortButton_clicked();
 
 private:
     Ui::MainWindow *ui;//管理的ui文件
     QGraphicsScene *scene; // 场景
     ShapeManager *shapeManager;
     QuickSort *quicksort;
+    BubbleSort *bubbleSort;
     //QList <ArrayBasic*>sortArray;为什么会报错呢，为什么呢！！！！！
     //简单的基础测试，之后将会用一个arraybasic类数组来实现对于多种排序方法的支持
 };

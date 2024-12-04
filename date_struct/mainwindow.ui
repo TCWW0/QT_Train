@@ -17,10 +17,10 @@
    <widget class="QTextEdit" name="debugOutput">
     <property name="geometry">
      <rect>
-      <x>580</x>
-      <y>100</y>
-      <width>231</width>
-      <height>250</height>
+      <x>540</x>
+      <y>89</y>
+      <width>280</width>
+      <height>350</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -108,10 +108,10 @@ QPushButton:hover {
    <widget class="QLineEdit" name="ArrayEdit">
     <property name="geometry">
      <rect>
-      <x>580</x>
-      <y>30</y>
-      <width>250</width>
-      <height>40</height>
+      <x>540</x>
+      <y>29</y>
+      <width>280</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="toolTip">
@@ -151,7 +151,7 @@ QLineEdit::placeholder {
       <x>840</x>
       <y>140</y>
       <width>131</width>
-      <height>51</height>
+      <height>41</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -174,11 +174,41 @@ QPushButton:hover {
      <string>快速排序</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="BubbleSort">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>210</y>
+      <width>131</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: #808080;
+    color: white;
+    border: 2px solid #808080;
+    border-radius: 15px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #333333;
+    border: 2px solid #333333;
+}</string>
+    </property>
+    <property name="text">
+     <string>冒泡排序II</string>
+    </property>
+   </widget>
    <zorder>graphicsView</zorder>
    <zorder>debugOutput</zorder>
    <zorder>bubbleSortButton</zorder>
    <zorder>ArrayEdit</zorder>
    <zorder>quickSortButton</zorder>
+   <zorder>BubbleSort</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

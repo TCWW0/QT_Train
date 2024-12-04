@@ -12,7 +12,6 @@ TARGET = date_struct #可执行文件名
 
 SOURCES += \
     arraybasic.cpp \
-    bubblesort.cpp \
     main.cpp \
     mainwindow.cpp \
     quicksort.cpp \
@@ -20,7 +19,6 @@ SOURCES += \
 
 HEADERS += \
     arraybasic.h \
-    bubblesort.h \
     mainwindow.h \
     quicksort.h \
     shapemanager.h
