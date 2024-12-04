@@ -10,9 +10,7 @@
 #include <QList>
 
 #include "shapemanager.h"
-#include "arraybasic.h"
 #include "quicksort.h"
-#include "bubblesort.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -43,7 +41,6 @@ private:
     QGraphicsScene *scene; // 场景
     ShapeManager *shapeManager;
     QuickSort *quicksort;
-    BubbleSort *bubbleSort;
     //QList <ArrayBasic*>sortArray;为什么会报错呢，为什么呢！！！！！
     //简单的基础测试，之后将会用一个arraybasic类数组来实现对于多种排序方法的支持
 };

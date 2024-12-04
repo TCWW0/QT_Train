@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "bubblesort.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -9,7 +10,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);//必须在这一行后再进行各个排序方法初始化，不然debugoutput是空的会导致崩溃
     connectInit();//各个按钮的槽函数连接
     shapeManager=new ShapeManager(scene,ui->debugOutput);
-    bubbleSort=new BubbleSort(scene,ui->debugOutput);
     quicksort=new QuickSort(scene,ui->debugOutput);
     //关联ui视图的scene和视图属性
     ui->graphicsView->setScene(scene);
@@ -70,7 +70,6 @@ void MainWindow::on_ArrayEdit_editingFinished()
         }
     }
     shapeManager->reviseArray(newArray);
-    bubbleSort->reviseArray(newArray);
     quicksort->reviseArray(newArray);
     //shapeManager->paint();//这里只是简单的使用一个类的绘画函数，这是因为我们所有的类的绘画设计都是一样的
     //bubbleSort->paint();
@@ -90,10 +89,6 @@ void MainWindow::on_bubbleSortButton_clicked()
 void MainWindow::bubbleSortButton_clicked()
 {
     scene->clear();
-    bubbleSort->paint();
-    qDebug() << "基类的冒泡排序调用";
-
-    bubbleSort->specialSort();
 }
 
 void MainWindow::quickSortButton_clicked()
