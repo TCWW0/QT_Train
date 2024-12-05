@@ -15,6 +15,7 @@ SOURCES += \
     node.cpp
 
 HEADERS += \
+    GuiStyle.h \
     heap.h \
     mainwindow.h \
     node.h

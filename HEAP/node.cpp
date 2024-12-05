@@ -2,6 +2,8 @@
 
 //在这里对这个节点类的属性进行设置
 
+int node::normal_radius=20;
+
 //节点颜色设置
 QColor node::normal_color = QColor(0xCC, 0xCC, 0xCC);  // #CCCCCC
 QColor node::chosen_color = QColor(0x60, 0x3B, 0xE6);  // #603BE6
@@ -27,7 +29,8 @@ int node::getValue()
 
 void node::setPos(int posx,int posy)
 {
-    this->pos=QPointF(posx,posy);
+    this->pos.setX(posx);
+    this->pos.setY(posy);
 }
 
 QPointF node::getPos()
