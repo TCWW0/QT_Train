@@ -13,7 +13,7 @@ heap::heap(QWidget* mainwindow,QGraphicsScene* scene,QGraphicsView* view)
     time_interval->setInterval(1000);//设置时间间隔为1000ms
 
     //将排序事件循环的退出循环设置为计时器到期，也就是1000ms触发一次
-    QObject::connect(time_interval,&QTimer::timeout,[this](){
+    QObject::connect(time_interval,&QTimer::timeout,[&](){
         sortloop->quit();
     });
 
@@ -83,7 +83,7 @@ void heap::DownAdjust(int k,int n,bool toshow)
                 this->time_interval->start();
                 sortloop->exec();
                 this->renderNodes(n);               //循环退出，重新渲染当前的堆结构
-                this->renderArray(k);               //重新渲染当前的储存结构
+                this->renderArray(n);               //重新渲染当前的储存结构
             }
 
             i=j;                                    //接下来需要进行位置的转移
@@ -125,15 +125,17 @@ void heap::HeapSort()
 
         time_interval->start();                         //前面已经设置间隔这里就空传就行
         sortloop->exec();
+
         this->renderNodes(len-i);                       //在这里已经是交换完成的，需要更新，就直接省去最后一个节点实现对应可视化
         this->renderArray(len-i);                       //更新对应的储存数组
+
 
         //重新调整堆，这次的将会播放动画，也是对于之前的参数的理解位置
         this->DownAdjust(0,len-i,true);
     }
     //当运行到这时，表示整个堆排序已经结束了
     this->renderArray(0);                               //渲染0个数组，这个也是一种关于消失的手法了
-
+    //34 23 65 12 76 87 45 39
     //更新状态，避免一些可能的错误
     this->readyToBuild=false;
     this->readyToSort=false;
@@ -141,7 +143,7 @@ void heap::HeapSort()
 
 bool heap::isReadyToBuild()
 {
-    qDebug()<<"当前readyToBuild为"<<readyToBuild;
+    //qDebug()<<"当前readyToBuild为"<<readyToBuild;
     return this->readyToBuild;
 }
 
@@ -355,8 +357,9 @@ void heap::animationPlay()
 //点击按钮后暂停动画
 void heap::animationPause()
 {
-    if(this->sortloop->isRunning())
-        this->sortloop->quit();
+    //启动空线程，由于是一个空的，直到触发上面那个信号函数才会退出
+    if(!this->pauseloop->isRunning())
+        this->pauseloop->exec();
 }
 
 

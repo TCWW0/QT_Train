@@ -7,24 +7,26 @@ MainWindow::MainWindow(QWidget *parent)
     ,scene(new QGraphicsScene)
     ,mybox(new Msgbox)
     //,Heap(new heap(this,this->scene,ui->graphicsView))        任何一个警告都必须注意!!!!!
-    ,timer_interval(new QTimer)
     ,playPhoto(QPixmap(":/icon/icon_play_pressed.png"))
     ,pausePhoto(QPixmap(":/icon/icon_pause_pressed.png"))
-
 {
     ui->setupUi(this);
 
     Heap=new heap(this,this->scene,ui->graphicsView);
     setWindowFlag(Qt::FramelessWindowHint);//无边框置顶
     this->setStyleSheet("#Widget{background-color: rgb(255,255,255);}");//设置整个窗口对象的背景色
+    this->myintro=new MyIntroduce(this);//子窗口
+    myintro->show();
+
     this->scene->setSceneRect(325,-140,920,660);//设置画布的显示位置
+
     this->playPhoto.scaled(ui->play->size(),Qt::KeepAspectRatio);//将图片与对应按钮大小进行绑定
     this->pausePhoto.scaled(ui->pause->size(),Qt::KeepAspectRatio);
 
     //设置QTooltip格式
     QToolTip::setFont(QFont("华文中宋",8));//这个是在鼠标移动到对应的存在提示的工具栏处会显示的东西
 
-    ui->graphicsView->setRenderHint(QPainter::Antialiasing);//在图片渲染中启用抗锯齿，是图片圆滑
+    ui->graphicsView->setRenderHint(QPainter::Antialiasing);//在图片渲染中启用抗锯齿，使图片圆滑
     ui->graphicsView->setScene(this->scene);
 
     // //设置画布QGraphicsView格式
@@ -72,6 +74,7 @@ void MainWindow::connectInit()
     connect(ui->sortButton,&QPushButton::clicked,this,&MainWindow::sortButton_clicked);
     connect(ui->play,&QPushButton::clicked,this,&MainWindow::play_clicked);
     connect(ui->pause,&QPushButton::clicked,this,&MainWindow::pause_clicked);
+    connect(ui->profileButton,&QPushButton::clicked,this,&MainWindow::profileButton_clicked);
 }
 
 
@@ -202,4 +205,9 @@ void MainWindow::pause_clicked()
         //pause
         this->Heap->animationPause();
     }
+}
+
+void MainWindow::profileButton_clicked()
+{
+    this->myintro->show();
 }

@@ -12,16 +12,19 @@ SOURCES += \
     heap.cpp \
     main.cpp \
     mainwindow.cpp \
+    myintroduce.cpp \
     node.cpp
 
 HEADERS += \
     GuiStyle.h \
     heap.h \
     mainwindow.h \
+    myintroduce.h \
     node.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    myintroduce.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

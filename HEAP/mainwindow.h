@@ -10,6 +10,7 @@
 
 #include "heap.h"
 #include "GuiStyle.h"   //调的别人的弹窗包
+#include "myintroduce.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -36,6 +37,7 @@ private:
 
     QPixmap playPhoto;
     QPixmap pausePhoto;
+    MyIntroduce* myintro;
 
 //这个分区与上面的那个分区区分开来，用来进行槽函数的定义，不使用自动连接槽了。
 public:
@@ -45,7 +47,7 @@ public:
     void sortButton_clicked();//开始排序的按钮
     void play_clicked();//继续运行的按钮
     void pause_clicked();//暂停排序的按钮
-
+    void profileButton_clicked();
 
      //调用的别人的scene格式，设计不了一点
 protected:
