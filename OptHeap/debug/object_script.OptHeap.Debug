@@ -1,0 +1,12 @@
+debug/heap.o
+debug/heapmanage.o
+debug/main.o
+debug/mainwindow.o
+debug/node.o
+debug/observer.o
+debug/window_intro.o
+debug/qrc_icon.o
+debug/moc_heap.o
+debug/moc_mainwindow.o
+debug/moc_observer.o
+debug/moc_window_intro.o

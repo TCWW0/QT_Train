@@ -1,0 +1,12 @@
+release/heap.o
+release/heapmanage.o
+release/main.o
+release/mainwindow.o
+release/node.o
+release/observer.o
+release/window_intro.o
+release/qrc_icon.o
+release/moc_heap.o
+release/moc_mainwindow.o
+release/moc_observer.o
+release/moc_window_intro.o
