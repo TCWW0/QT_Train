@@ -22,8 +22,9 @@ void heap::setArrayValue(QVector<int>arr)
         this->array.push_back(i);
     }
     //直接建立大顶堆
+    //修改下面这第三个参数可以选择是否渲染堆的最大化过程
     int n=this->array.size();
-    for(int i=(n-1/2);i>=0;i--){
+    for(int i=(n-1)/2;i>=0;i--){
         this->AdjustHeap(i,n,false);
     }
     //可以开始在前端render大顶堆

@@ -197,7 +197,7 @@ public:
         label_17->setText(QCoreApplication::translate("window_intro", "<html><head/><body><p><span style=\" font-size:10pt; color:#ababab;\">on your desktop.</span></p><p><span style=\" font-size:10pt;\"><br/></span></p></body></html>", nullptr));
         label_18->setText(QCoreApplication::translate("window_intro", "<html><head/><body><p><span style=\" font-size:10pt; color:#ababab;\">HeatUp! Experience heap sort in action, visualized</span></p><p><span style=\" font-size:10pt;\"><br/></span></p></body></html>", nullptr));
         label_19->setText(QCoreApplication::translate("window_intro", "<html><head/><body><p>\345\205\263\344\272\216\347\216\260\344\275\234\350\200\205</p></body></html>", nullptr));
-        label_20->setText(QCoreApplication::translate("window_intro", "<html><head/><body><p><span style=\" font-size:10pt; color:#ababab;\">2023307030215</span></p></body></html>", nullptr));
+        label_20->setText(QCoreApplication::translate("window_intro", "<html><head/><body><p><span style=\" font-size:10pt; color:#ababab;\">2023307030215 Zhicheng Chen</span></p></body></html>", nullptr));
     } // retranslateUi
 
 };

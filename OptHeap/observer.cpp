@@ -58,7 +58,7 @@ void HeapObserver::renderArray(int k)
         }
         else{
             //文字
-            QGraphicsTextItem* t=new QGraphicsTextItem;
+            QGraphicsTextItem* t=new QGraphicsTextItem();
             t->setFont(QFont("Arial Black",13,false));
             t->setPos(QPointF(340+i*60,-65));
             t->setPlainText(QString::number(this->nodes[i].getValue()));
@@ -81,6 +81,7 @@ void HeapObserver::renderArray(int k)
 
 void HeapObserver::renderNodes(int k)
 {
+    //清除原有的资源
     m_scene->clear();
     //先画连线
     for(int i=0;i<k;i++){
