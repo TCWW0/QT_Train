@@ -15,6 +15,7 @@ SOURCES += \
     mainwindow.cpp \
     node.cpp \
     observer.cpp \
+    strategy.cpp \
     window_intro.cpp
 
 HEADERS += \
@@ -24,6 +25,7 @@ HEADERS += \
     myguistyle.h \
     node.h \
     observer.h \
+    strategy.h \
     window_intro.h
 
 FORMS += \

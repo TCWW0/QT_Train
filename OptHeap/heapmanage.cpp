@@ -5,6 +5,11 @@ heapManage::heapManage(QWidget* window,QGraphicsScene* Scene,QGraphicsView* View
     heapVisual(new HeapObserver(window,Scene,View))
 {
     connectInit();
+
+    //使用自动执行作为默认策略
+    this->execution=std::make_unique<StepExecution>();
+    this->execution->setParameters(HEAP->getLoop(),HEAP->getTimeInterval());
+    this->HEAP->setExecutionStrategy(std::move(this->execution));
 }
 
 void heapManage::connectInit()
@@ -37,6 +42,10 @@ void heapManage::AnimationPause()
 {
     this->HEAP->AnimationPause();
 }
+void heapManage::stopLoopRunning()
+{
+    this->HEAP->stopLoopRunning();
+}
 bool heapManage::isLoopRunning()
 {
     return this->HEAP->isLoopRunning();
@@ -61,4 +70,9 @@ void heapManage::setArrayValue(QVector<int> res)
 void heapManage::HeapSort()
 {
     this->HEAP->HeapSort();
+}
+
+void heapManage::setExecutionStrategy(std::unique_ptr<Strategy> strategy)
+{
+    this->HEAP->setExecutionStrategy(std::move(strategy));
 }

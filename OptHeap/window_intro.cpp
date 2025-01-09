@@ -22,7 +22,6 @@ window_intro::~window_intro()
     delete animation;
 }
 void window_intro::show(){
-
     animation->setStartValue(QRect(-400,0,400,760));
     animation->setEndValue(QRect(0,0,400,760));
     animation->start();

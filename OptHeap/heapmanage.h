@@ -25,6 +25,11 @@ public:
 private:
     heap* HEAP;
     HeapObserver* heapVisual;
+
+    //当前执行策略
+    std::unique_ptr<Strategy> execution;
+
+    //初始化连接
     void connectInit();
 
 public:
@@ -34,12 +39,14 @@ public:
     bool isreadytoBuild();
     void AnimationPlay();
     void AnimationPause();
+    void stopLoopRunning();
     bool isLoopRunning();
     void renderNodes(int k);
     void renderArray(int k);
     void setArrayValue(QVector<int> res);
     int getArraySize();
     void HeapSort();
+    void setExecutionStrategy(std::unique_ptr<Strategy> strategy);
 };
 
 #endif // HEAPMANAGE_H

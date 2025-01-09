@@ -30,6 +30,10 @@ public:
     QPushButton *exitButton;
     QLabel *label;
     QPushButton *profileButton;
+    QLabel *function;
+    QPushButton *stepButton;
+    QPushButton *autoButton;
+    QPushButton *pushButton;
     QFrame *frame;
     QPlainTextEdit *input;
     QLabel *label_4;
@@ -123,6 +127,91 @@ public:
 "QPushButton:pressed{\n"
 "icon:url(\":/icon/icon/icon_more_pressed.png\");\n"
 "icon-size:20px 20px;\n"
+"}"));
+        function = new QLabel(titlebar);
+        function->setObjectName("function");
+        function->setGeometry(QRect(340, 20, 161, 31));
+        function->setStyleSheet(QString::fromUtf8("QLabel {\n"
+"    background-color: #f7f7f7; /* \346\233\264\346\265\205\347\232\204\350\203\214\346\231\257\351\242\234\350\211\262 */\n"
+"    color: #4d4d4d;           /* \350\276\203\346\237\224\345\222\214\347\232\204\345\255\227\344\275\223\351\242\234\350\211\262 */\n"
+"    border: 1px solid #d9d9d9;/* \346\265\205\347\201\260\350\211\262\350\276\271\346\241\206 */\n"
+"    border-radius: 8px;       /* \345\234\206\350\247\222 */\n"
+"    padding: 8px;             /* \346\233\264\345\244\247\347\232\204\345\206\205\350\276\271\350\267\235\345\242\236\345\212\240\350\210\222\351\200\202\346\204\237 */\n"
+"    font: 13px \"Segoe UI\";    /* \344\275\277\347\224\250\346\237\224\345\222\214\347\232\204\345\255\227\344\275\223 */\n"
+"    text-align: center;       /* \346\226\207\346\234\254\345\261\205\344\270\255 */\n"
+"}\n"
+""));
+        stepButton = new QPushButton(titlebar);
+        stepButton->setObjectName("stepButton");
+        stepButton->setGeometry(QRect(530, 20, 93, 28));
+        stepButton->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+"    background-color: white; \n"
+"    border: 1px solid #ffcc33;\n"
+"    border-radius: 10px; \n"
+"    color: #ffcc33; \n"
+"    padding: 5px; \n"
+"    font-size: 12px; \n"
+"	font-weight:bold;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: #ffcc33; \n"
+"	color:white;\n"
+"	border-color:#ffcc33;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background-color: #E6B82E; /* \346\214\211\351\222\256\350\242\253\346\214\211\344\270\213\346\227\266\347\232\204\350\203\214\346\231\257\350\211\262 */\n"
+"	color:#cccccc;\n"
+"	border-color:#E6B82E;\n"
+"}"));
+        autoButton = new QPushButton(titlebar);
+        autoButton->setObjectName("autoButton");
+        autoButton->setGeometry(QRect(640, 20, 93, 28));
+        autoButton->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+"    background-color: white; \n"
+"    border: 1px solid #ffcc33;\n"
+"    border-radius: 10px; \n"
+"    color: #ffcc33; \n"
+"    padding: 5px; \n"
+"    font-size: 12px; \n"
+"	font-weight:bold;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: #ffcc33; \n"
+"	color:white;\n"
+"	border-color:#ffcc33;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background-color: #E6B82E; /* \346\214\211\351\222\256\350\242\253\346\214\211\344\270\213\346\227\266\347\232\204\350\203\214\346\231\257\350\211\262 */\n"
+"	color:#cccccc;\n"
+"	border-color:#E6B82E;\n"
+"}"));
+        pushButton = new QPushButton(titlebar);
+        pushButton->setObjectName("pushButton");
+        pushButton->setGeometry(QRect(750, 20, 93, 28));
+        pushButton->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+"    background-color: white; \n"
+"    border: 1px solid #ffcc33;\n"
+"    border-radius: 10px; \n"
+"    color: #ffcc33; \n"
+"    padding: 5px; \n"
+"    font-size: 12px; \n"
+"	font-weight:bold;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: #ffcc33; \n"
+"	color:white;\n"
+"	border-color:#ffcc33;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background-color: #E6B82E; /* \346\214\211\351\222\256\350\242\253\346\214\211\344\270\213\346\227\266\347\232\204\350\203\214\346\231\257\350\211\262 */\n"
+"	color:#cccccc;\n"
+"	border-color:#E6B82E;\n"
 "}"));
         frame = new QFrame(centralwidget);
         frame->setObjectName("frame");
@@ -330,6 +419,10 @@ public:
         exitButton->setText(QCoreApplication::translate("MainWindow", "\351\200\200\345\207\272", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:18pt; color:#000000;\">HeapUp!</span></p></body></html>", nullptr));
         profileButton->setText(QString());
+        function->setText(QCoreApplication::translate("MainWindow", "\345\275\223\345\211\215\346\250\241\345\274\217\357\274\232\345\215\225\346\255\245\346\211\247\350\241\214", nullptr));
+        stepButton->setText(QCoreApplication::translate("MainWindow", "\345\215\225\346\255\245\346\211\247\350\241\214", nullptr));
+        autoButton->setText(QCoreApplication::translate("MainWindow", "\350\207\252\345\212\250\346\211\247\350\241\214", nullptr));
+        pushButton->setText(QCoreApplication::translate("MainWindow", "\344\270\213\344\270\200\346\255\245", nullptr));
         label_4->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><pre style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:19px; background-color:#ffffff;\"><span style=\" font-family:'Consolas','Courier New','monospace'; color:#001080;\">   arr</span><span style=\" font-family:'Consolas','Courier New','monospace'; color:#3b3b3b;\">[...];</span></pre><pre style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#ffffff;\"><span style=\" font-family:'Consolas','Courier New','monospace'; color:#0000ff;\">   void </span><span style=\" font-family:'Consolas','Courier New','monospace'; color:#795e26;\">AdjustHeap</span><span style=\" font-family:'Consolas','Courier New','monospace'; color:#3b3b3b;\">(</span><span style=\" font-family:'Consolas','Courier New','monospace'; color:#0000ff;\">int </span><span style=\" font-family:'Consolas','Courier New','monospace'; color:#001080;\">k</span><span style=\" font-famil"
                         "y:'Consolas','Courier New','monospace'; color:#3b3b3b;\">,</span><span style=\" font-family:'Consolas','Courier New','monospace'; color:#0000ff;\">int </span><span style=\" font-family:'Consolas','Courier New','monospace'; color:#001080;\">n</span><span style=\" font-family:'Consolas','Courier New','monospace'; color:#3b3b3b;\">){</span></pre><pre style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#ffffff;\"><span style=\" font-family:'Consolas','Courier New','monospace'; color:#0000ff;\">       int</span><span style=\" font-family:'Consolas','Courier New','monospace'; color:#3b3b3b;\"> i</span><span style=\" font-family:'Consolas','Courier New','monospace'; color:#000000;\">=</span><span style=\" font-family:'Consolas','Courier New','monospace'; color:#3b3b3b;\">k;</span></pre><pre style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#ffffff;\"><span"
                         " style=\" font-family:'Consolas','Courier New','monospace'; color:#0000ff;\">       int</span><span style=\" font-family:'Consolas','Courier New','monospace'; color:#3b3b3b;\"> j</span><span style=\" font-family:'Consolas','Courier New','monospace'; color:#000000;\">=</span><span style=\" font-family:'Consolas','Courier New','monospace'; color:#098658;\">2</span><span style=\" font-family:'Consolas','Courier New','monospace'; color:#000000;\">*</span><span style=\" font-family:'Consolas','Courier New','monospace'; color:#3b3b3b;\">i</span><span style=\" font-family:'Consolas','Courier New','monospace'; color:#000000;\">+</span><span style=\" font-family:'Consolas','Courier New','monospace'; color:#098658;\">1</span><span style=\" font-family:'Consolas','Courier New','monospace'; color:#3b3b3b;\">;</span></pre><pre style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#ffffff;\"><span style=\" font-family:'Consolas','Courier New','mo"

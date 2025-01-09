@@ -59,8 +59,9 @@ void heap::AdjustHeap(int k,int n,bool toshow)
             qSwap(this->array[i],this->array[j]);
             emit swapNodeValue(i,j);
             if(toshow){
-                time_interval->start();
-                loop->exec();
+                // time_interval->start();
+                // loop->exec();
+                this->executeCurrentStep();
                 emit renderNodes(n);
                 emit renderArray(n);
             }
@@ -79,13 +80,13 @@ void heap::HeapSort()
         qSwap(this->array[0],this->array[n-i]);
         emit swapNodeValue(0,n-i);
 
-        time_interval->start();
-        loop->exec();
+        // time_interval->start();
+        // loop->exec();
+        this->executeCurrentStep();
         emit renderNodes(n-i);
         emit renderArray(n-i);
         //重新调整为大顶堆
         this->AdjustHeap(0,n-i,true);
-
     }
     emit renderArray(0);
 
@@ -119,5 +120,35 @@ void heap::AnimationPlay(){
 void heap::AnimationPause(){
     if(!this->pauseloop->isRunning()){
         this->pauseloop->exec();
+    }
+}
+
+void heap::stopLoopRunning()
+{
+    if(this->loop->isRunning())
+    {
+        this->loop->quit();
+    }
+}
+
+void heap::setExecutionStrategy(std::unique_ptr<Strategy> strategy)
+{
+    this->executionStrategy = std::move(strategy);
+    if (executionStrategy) {
+        executionStrategy->setParameters(loop, time_interval);
+    }
+}
+
+void heap::executeCurrentStep()
+{
+    //executionStrategy->execute();
+    if(executionStrategy)
+    {
+        executionStrategy->execute();
+    }
+    else
+    {
+        qDebug()<<"当前没有传入策略类实例";
+        exit(0);
     }
 }

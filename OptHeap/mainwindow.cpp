@@ -181,3 +181,29 @@ void MainWindow::on_pause_clicked()
         this->Heap->AnimationPause();
     }
 }
+
+void MainWindow::on_stepButton_clicked()
+{
+    this->ui->function->setText("当前模式：单步执行");
+    this->Heap->setExecutionStrategy(std::make_unique<StepExecution>());
+}
+
+void MainWindow::on_autoButton_clicked()
+{
+    this->ui->function->setText("当前模式：自动执行");
+    this->Heap->setExecutionStrategy(std::make_unique<AutoExecution>());
+    //判断当前是否已经被阻塞。如果是，那么解开阻塞
+    if(this->Heap->isLoopRunning())
+    {
+        this->Heap->stopLoopRunning();//让它停止阻塞
+    }
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    if(this->Heap->isLoopRunning())
+    {
+        this->Heap->stopLoopRunning();//让它停止阻塞
+    }
+}
+

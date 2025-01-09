@@ -10,7 +10,9 @@
 #include <QEventLoop>
 #include <QTimer>
 #include <QObject>
+#include <memory.h>
 #include "observer.h"
+#include "strategy.h"
 
 //通过一个构造函数去进行各个观察者动作的连接
 class heap:public QObject
@@ -25,10 +27,9 @@ private:
     bool readytoBuild;                    //标志是否可以开始建堆
     bool readytoSort;                     //标志是否可以开始排序
 
+    QEventLoop* pauseloop;                      //暂停事件
     QTimer* time_interval;                      //延时
     QEventLoop* loop;                           //排序事件
-    QEventLoop* pauseloop;                      //暂停事件
-
 public:
     void setArrayValue(QVector<int>arr);        //设置数组的值
     int getArraySize();                         //获取当前array大小
@@ -44,6 +45,8 @@ public:
     void AnimationPlay();                        //排序动画播放
     void AnimationPause();                       //排序动画暂停
 
+    void stopLoopRunning();                      //退出loop的事件循环
+
 signals:
     void renderArray(int k);                    //渲染数组函数
     void renderNodes(int k);                    //渲染堆的结构
@@ -52,6 +55,17 @@ signals:
     void swapNodeValue(int i,int j);            //进行逻辑节点值的交换
     void updateNodesValue(QVector<int> res);
     void setTextAlign(QGraphicsTextItem* t);    //设置文本格式
+
+private:
+    std::unique_ptr<Strategy>executionStrategy; //当前执行的策略
+
+public:
+    void setExecutionStrategy(std::unique_ptr<Strategy> strategy); // 设置执行策略
+    void executeCurrentStep(); // 调用策略执行
+
+    // 方便策略模式使用，不应该向用户暴露，之后会先去优化设计的，这里这种其实很危险
+    QEventLoop* getLoop() const { return loop; }
+    QTimer* getTimeInterval() const { return time_interval; }
 };
 
 #endif // HEAP_H

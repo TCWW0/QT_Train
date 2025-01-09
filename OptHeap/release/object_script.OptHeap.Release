@@ -4,6 +4,7 @@ release/main.o
 release/mainwindow.o
 release/node.o
 release/observer.o
+release/strategy.o
 release/window_intro.o
 release/qrc_icon.o
 release/moc_heap.o

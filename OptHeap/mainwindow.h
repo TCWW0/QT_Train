@@ -42,6 +42,12 @@ private slots:
     void on_play_clicked();
     void on_pause_clicked();
 
+    void on_stepButton_clicked();
+
+    void on_autoButton_clicked();
+
+    void on_pushButton_clicked();
+
 protected:
     QGraphicsScene *scene;              //scene
     QString invalid_boxStyle="<html>"

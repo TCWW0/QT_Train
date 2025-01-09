@@ -43,6 +43,7 @@ public:
     QLabel *label_18;
     QLabel *label_19;
     QLabel *label_20;
+    QLabel *label_21;
 
     void setupUi(QWidget *window_intro)
     {
@@ -168,6 +169,10 @@ public:
         label_20->setObjectName("label_20");
         label_20->setGeometry(QRect(130, 470, 261, 21));
         label_20->setFont(font2);
+        label_21 = new QLabel(frame);
+        label_21->setObjectName("label_21");
+        label_21->setGeometry(QRect(130, 550, 271, 21));
+        label_21->setFont(font2);
 
         retranslateUi(window_intro);
 
@@ -198,6 +203,7 @@ public:
         label_18->setText(QCoreApplication::translate("window_intro", "<html><head/><body><p><span style=\" font-size:10pt; color:#ababab;\">HeatUp! Experience heap sort in action, visualized</span></p><p><span style=\" font-size:10pt;\"><br/></span></p></body></html>", nullptr));
         label_19->setText(QCoreApplication::translate("window_intro", "<html><head/><body><p>\345\205\263\344\272\216\347\216\260\344\275\234\350\200\205</p></body></html>", nullptr));
         label_20->setText(QCoreApplication::translate("window_intro", "<html><head/><body><p><span style=\" font-size:10pt; color:#ababab;\">2023307030215 Zhicheng Chen</span></p></body></html>", nullptr));
+        label_21->setText(QCoreApplication::translate("window_intro", "<html><head/><body><p><span style=\" font-size:10pt; color:#ababab;\">24/12/26 \346\211\247\350\241\214\347\255\226\347\225\245\351\200\211\346\213\251\345\212\237\350\203\275\346\267\273\345\212\240</span></p></body></html>", nullptr));
     } // retranslateUi
 
 };
